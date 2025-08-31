@@ -1,11 +1,12 @@
 <?php
-// includes/footer.php
+// includes/footer.php (Royal Orchid Design)
 ?>
-    </main> <!-- Closes the main container from header.php -->
+    </div> <!-- Closes the main container div from header.php -->
 
-    <footer class="bg-dark text-white text-center p-3 mt-auto">
+    <footer class="footer-custom text-center py-4 mt-5">
         <div class="container">
-            <p>&copy; <?php echo date('Y'); ?> Electrify. All Rights Reserved.</p>
+            <!-- MODIFICATION: Updated tagline to match the new "Royal Orchid" brand voice -->
+            <p class="mb-0">&copy; <?php echo date('Y'); ?> Electrify. Precision Engineered Electronics.</p>
         </div>
     </footer>
 

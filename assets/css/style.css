@@ -1,0 +1,172 @@
+/* =================================================================
+ *
+ *              ELECTRIFY DESIGN SYSTEM: "ROYAL ORCHID"
+ *              Version 1.0
+ *              Author: Gemini (Senior Developer)
+ *              Palette Direction: Hardik Dharaiya
+ *
+ * ================================================================= */
+
+/*
+ * ===================================================
+ *                 1. ROOT & COLOR PALETTE
+ * ===================================================
+ */
+:root {
+    --color-primary-dark: #0C0420;      /* For Headings & Primary Text */
+    --color-primary-action: #7B466A;    /* For Main Buttons */
+    --color-primary-hover: #9F6496;     /* For Hover Effects */
+    --color-text-secondary: #5D3C64;    /* For Paragraphs & Softer Text */
+    --color-accent: #BA6E8F;            /* For Secondary/Subtle links or highlights */
+    --color-background: #FFFFFF;        /* Pure White for a clean canvas */
+    --color-subtle-bg: #F7F2FA;         /* Lavender-tinted light gray for footer */
+    --color-border: #EAE2F0;           /* A light, lavender-gray for borders */
+
+    --shadow-md: 0 4px 6px -1px rgb(12 4 32 / 0.1), 0 2px 4px -2px rgb(12 4 32 / 0.1);
+    --shadow-lg: 0 10px 15px -3px rgb(12 4 32 / 0.1), 0 4px 6px -4px rgb(12 4 32 / 0.1);
+    --border-radius: 0.5rem; /* 8px */
+}
+
+/*
+ * ===================================================
+ *                 2. GLOBAL & ANIMATIONS
+ * ===================================================
+ */
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--color-background);
+    color: var(--color-text-secondary);
+    font-family: 'Inter', sans-serif;
+    animation: fadeInAnimation ease 1s;
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards;
+}
+
+@keyframes fadeInAnimation {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+}
+
+
+/*
+ * ===================================================
+ *                    3. TYPOGRAPHY
+ * ===================================================
+ */
+h1, h2, h3, h4, h5, h6 {
+    color: var(--color-primary-dark);
+    font-weight: 700;
+}
+
+
+/*
+ * ===================================================
+ *              4. COMPONENT STYLES: HEADER
+ * ===================================================
+ */
+.header-custom {
+    background-color: var(--color-background);
+    border-bottom: 1px solid var(--color-border);
+}
+
+.header-custom .navbar-brand,
+.header-custom .nav-link {
+    color: var(--color-primary-dark) !important;
+    font-weight: 500;
+    transition: color 0.2s ease-in-out;
+}
+
+.header-custom .nav-link:hover {
+    color: var(--color-primary-action) !important;
+}
+
+.header-custom .navbar-brand .brand-icon {
+    color: var(--color-primary-action);
+}
+
+
+/*
+ * ===================================================
+ *              5. COMPONENT STYLES: BUTTONS
+ * ===================================================
+ */
+.btn {
+    border-radius: var(--border-radius);
+    transition: all 0.2s ease-in-out;
+    padding: 0.75rem 1.5rem;
+    font-weight: 600;
+    border-width: 2px;
+}
+
+.btn-primary {
+    background-color: var(--color-primary-action);
+    border-color: var(--color-primary-action);
+    color: white;
+}
+
+.btn-primary:hover {
+    background-color: var(--color-primary-hover);
+    border-color: var(--color-primary-hover);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+    color: white;
+}
+
+.btn-secondary {
+    background-color: transparent;
+    border-color: var(--color-primary-dark);
+    color: var(--color-primary-dark);
+}
+
+.btn-secondary:hover {
+    background-color: var(--color-primary-dark);
+    border-color: var(--color-primary-dark);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+    color: white;
+}
+
+
+/*
+ * ===================================================
+ *              6. COMPONENT STYLES: CARDS
+ * ===================================================
+ */
+.card {
+    border: 1px solid var(--color-border);
+    border-radius: var(--border-radius);
+    transition: all 0.2s ease-in-out;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-lg);
+    border-color: var(--color-primary-action);
+}
+
+
+/*
+ * ===================================================
+ *              7. COMPONENT STYLES: FOOTER
+ * ===================================================
+ */
+.footer-custom {
+    background-color: var(--color-subtle-bg);
+    color: var(--color-text-secondary);
+    border-top: 1px solid var(--color-border);
+}
+
+
+/*
+ * ===================================================
+ *                   8. RESPONSIVENESS
+ * ===================================================
+ */
+@media (max-width: 768px) {
+    h1.display-5 {
+        font-size: 2.5rem;
+    }
+}

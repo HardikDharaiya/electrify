@@ -1,11 +1,7 @@
 <?php
-// index.php - The Home Page
+// index.php - The Home Page (Royal Orchid Design)
 
-// We include the header file. This contains the opening HTML, head section, and navigation bar.
-// Using require_once ensures the file is included only once, preventing potential errors.
 require_once 'includes/header.php';
-
-// We also include our database connection file to make it available, though we aren't using it on this page yet.
 require_once 'config/db_connect.php';
 ?>
 
@@ -13,57 +9,60 @@ require_once 'config/db_connect.php';
 <!--            START: HOME PAGE CONTENT             -->
 <!-- =============================================== -->
 
-<div class="p-5 mb-4 bg-light rounded-3">
-    <div class="container-fluid py-5">
-        <h1 class="display-5 fw-bold">Welcome to Electrify</h1>
-        <p class="col-md-8 fs-4">Your one-stop shop for high-quality electronic components. From resistors to microcontrollers, we have everything you need for your next project.</p>
-        <a href="products.php" class="btn btn-primary btn-lg" type="button">Shop All Products</a>
+<div class="text-center py-5">
+    <h1 class="display-5 fw-bold">Precision Engineered Electronics</h1>
+    <!-- 
+    MODIFICATION:
+    - Removed the inline `style` attribute. The color is now correctly inherited from the body style in style.css.
+    - Updated the text to match the sophisticated new brand identity.
+    -->
+    <p class="fs-4 col-md-8 mx-auto">Discover a curated selection of high-quality components for the discerning engineer and innovator.</p>
+    <a href="products.php" class="btn btn-primary btn-lg mt-3" type="button">Explore Our Collection</a>
+</div>
+
+
+<div class="row text-center mt-5 mb-4">
+    <div class="col">
+        <h2>Shop by Category</h2>
     </div>
 </div>
 
-<div class="row">
-    <div class="col-md-12">
-        <h2>Featured Categories</h2>
-        <hr>
-    </div>
-</div>
 
 <div class="row g-4">
     <div class="col-md-4">
-        <div class="card">
-            <div class="card-body">
-                <h5 class="card-title">Passive Components</h5>
-                <p class="card-text">Resistors, capacitors, inductors, and more. The essential building blocks for any circuit.</p>
-                <a href="#" class="btn btn-secondary">View Products</a>
+        <div class="card h-100">
+            <div class="card-body text-center p-4 d-flex flex-column">
+                <h5 class="card-title mb-3">Passive Components</h5>
+                <p class="card-text">Essential resistors, capacitors, and inductors. The foundational building blocks for any circuit.</p>
+                <!-- NOTE: The .btn-secondary class will now automatically apply our new "outline" style. -->
+                <a href="#" class="btn btn-secondary mt-auto">View Products</a>
             </div>
         </div>
     </div>
     <div class="col-md-4">
-        <div class="card">
-            <div class="card-body">
-                <h5 class="card-title">Active Components</h5>
-                <p class="card-text">Diodes, transistors, and integrated circuits that power your innovative designs.</p>
-                <a href="#" class="btn btn-secondary">View Products</a>
+        <div class="card h-100">
+            <div class="card-body text-center p-4 d-flex flex-column">
+                <h5 class="card-title mb-3">Active Components</h5>
+                <p class="card-text">The power of innovation. Explore our range of diodes, transistors, and integrated circuits.</p>
+                <a href="#" class="btn btn-secondary mt-auto">View Products</a>
             </div>
         </div>
     </div>
     <div class="col-md-4">
-        <div class="card">
-            <div class="card-body">
-                <h5 class="card-title">Tools & Accessories</h5>
-                <p class="card-text">High-quality soldering irons, multimeters, and everything else you need to build and test.</p>
-                <a href="#" class="btn btn-secondary">View Products</a>
+        <div class="card h-100">
+            <div class="card-body text-center p-4 d-flex flex-column">
+                <h5 class="card-title mb-3">Tools & Accessories</h5>
+                <p class="card-text">Precision tools for the professional. High-quality soldering irons, multimeters, and more.</p>
+                <a href="#" class="btn btn-secondary mt-auto">View Products</a>
             </div>
         </div>
     </div>
 </div>
-
 
 <!-- =============================================== -->
 <!--             END: HOME PAGE CONTENT              -->
 <!-- =============================================== -->
 
 <?php
-// We include the footer file. This contains the closing body/html tags and our JavaScript links.
 require_once 'includes/footer.php';
 ?>
