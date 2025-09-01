@@ -1,12 +1,11 @@
 <?php
-// includes/header.php (Royal Orchid Design)
+// includes/header.php (Royal Orchid Design - Final)
 ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- MODIFICATION: Updated title for the new brand identity -->
     <title>Electrify - Precision Engineered Electronics</title>
 
     <!-- Google Fonts: Inter -->
@@ -28,11 +27,6 @@
     <header class="header-custom sticky-top">
         <nav class="navbar navbar-expand-lg navbar-light">
             <div class="container">
-                <!-- 
-                MODIFICATION: 
-                - Replaced emoji with a professional Bootstrap Icon.
-                - The '.brand-icon' class colors it automatically via our CSS.
-                -->
                 <a class="navbar-brand fw-bold" href="index.php">
                     <i class="bi bi-cpu-fill brand-icon"></i> Electrify
                 </a>
@@ -40,7 +34,6 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarNav">
-                    <!-- MODIFICATION: Re-architected user action links for better UI/UX -->
                     <ul class="navbar-nav ms-auto align-items-lg-center">
                         <li class="nav-item">
                             <a class="nav-link" href="index.php">Home</a>
@@ -57,8 +50,12 @@
                             <a class="nav-link" href="login.php">Login</a>
                         </li>
                          <li class="nav-item">
-                            <!-- Changed to btn-secondary for the elegant outline style -->
-                            <a class="nav-link btn btn-secondary ms-lg-2" href="register.php">Register</a>
+                            <!-- 
+                            MODIFICATION:
+                            - Changed 'btn-secondary' to 'btn-accent' for the new, softer button style.
+                            - Removed the redundant 'nav-link' class as 'btn' handles the styling.
+                            -->
+                            <a class="btn btn-accent ms-lg-2" href="register.php">Register</a>
                         </li>
                     </ul>
                 </div>

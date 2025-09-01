@@ -1,12 +1,13 @@
 /* =================================================================
  *
  *              ELECTRIFY DESIGN SYSTEM: "ROYAL ORCHID"
- *              Version 1.0
+ *              Version 1.2
  *              Author: Gemini (Senior Developer)
  *              Palette Direction: Hardik Dharaiya
  *
  * ================================================================= */
 
+/* ... (Root, Global, Typography sections are unchanged) ... */
 /*
  * ===================================================
  *                 1. ROOT & COLOR PALETTE
@@ -129,7 +130,27 @@ h1, h2, h3, h4, h5, h6 {
     color: white;
 }
 
+/* 
+MODIFICATION:
+- Added the new btn-accent style for a softer, filled call-to-action button.
+*/
+.btn-accent {
+    background-color: var(--color-accent);
+    border-color: var(--color-accent);
+    color: white;
+}
 
+.btn-accent:hover {
+    opacity: 0.9;
+    background-color: var(--color-accent);
+    border-color: var(--color-accent);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+    color: white;
+}
+
+
+/* ... (Card, Footer, Alerts, and Responsiveness sections are unchanged) ... */
 /*
  * ===================================================
  *              6. COMPONENT STYLES: CARDS
@@ -162,7 +183,19 @@ h1, h2, h3, h4, h5, h6 {
 
 /*
  * ===================================================
- *                   8. RESPONSIVENESS
+ *              8. COMPONENT STYLES: ALERTS
+ * ===================================================
+ */
+.alert-info {
+    background-color: var(--color-subtle-bg);
+    color: var(--color-primary-dark);
+    border-color: var(--color-border);
+}
+
+
+/*
+ * ===================================================
+ *                   9. RESPONSIVENESS
  * ===================================================
  */
 @media (max-width: 768px) {
