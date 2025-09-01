@@ -1,5 +1,11 @@
 <?php
-// includes/header.php (Royal Orchid Design - Final)
+// includes/header.php (Session Safeguard Version)
+
+// This is the professional way to manage sessions.
+// We check if a session has NOT already been started before starting one.
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -7,6 +13,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Electrify - Precision Engineered Electronics</title>
+    
+    <!-- (The rest of the file is identical) -->
 
     <!-- Google Fonts: Inter -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -46,17 +54,29 @@
                                 <i class="bi bi-cart"></i> Cart
                             </a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="login.php">Login</a>
-                        </li>
-                         <li class="nav-item">
-                            <!-- 
-                            MODIFICATION:
-                            - Changed 'btn-secondary' to 'btn-accent' for the new, softer button style.
-                            - Removed the redundant 'nav-link' class as 'btn' handles the styling.
-                            -->
-                            <a class="btn btn-accent ms-lg-2" href="register.php">Register</a>
-                        </li>
+                        
+                        <?php if (isset($_SESSION['user_id'])): ?>
+                            
+                            <li class="nav-item">
+                                <a class="nav-link" href="account.php">
+                                    Welcome, <?php echo htmlspecialchars($_SESSION['user_first_name']); ?>
+                                </a>
+                            </li>
+                             <li class="nav-item">
+                                <a class="nav-link" href="logout.php">Logout</a>
+                            </li>
+
+                        <?php else: ?>
+
+                            <li class="nav-item">
+                                <a class="nav-link" href="login.php">Login</a>
+                            </li>
+                             <li class="nav-item">
+                                <a class="btn btn-accent ms-lg-2" href="register.php">Register</a>
+                            </li>
+
+                        <?php endif; ?>
+
                     </ul>
                 </div>
             </div>
