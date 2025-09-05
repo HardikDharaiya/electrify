@@ -128,3 +128,18 @@ UPDATE `products` SET `price` = 79.00 WHERE `sku` = 'ELEC-ACTV-003';
 UPDATE `products` SET `price` = 1599.00 WHERE `sku` = 'ELEC-TOOL-001';
 UPDATE `products` SET `price` = 1999.00 WHERE `sku` = 'ELEC-TOOL-002';
 UPDATE `products` SET `price` = 649.00 WHERE `sku` = 'ELEC-TOOL-003';
+
+
+-- This script creates the `cart` table for storing persistent cart data for logged-in users.
+
+CREATE TABLE `cart` (
+  `cart_id` INT(11) NOT NULL AUTO_INCREMENT,
+  `user_id` INT(11) NOT NULL,
+  `product_id` INT(11) NOT NULL,
+  `quantity` INT(11) NOT NULL,
+  `added_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`cart_id`),
+  FOREIGN KEY (`user_id`) REFERENCES `users`(`user_id`) ON DELETE CASCADE,
+  FOREIGN KEY (`product_id`) REFERENCES `products`(`product_id`) ON DELETE CASCADE,
+  UNIQUE KEY `user_product_unique` (`user_id`, `product_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
