@@ -1,73 +1,77 @@
 <?php
-// checkout.php - Final step before payment.
+// checkout.php - Final step before payment (Corrected Logic)
 
 require_once 'includes/header.php';
 require_once 'config/db_connect.php';
 
 // --- SECURITY GUARD 1: USER AUTHENTICATION ---
-// If the user is not logged in, redirect them to the login page.
 if (!isset($_SESSION['user_id'])) {
     $_SESSION['error_message'] = "Please log in to proceed to checkout.";
     header("Location: login.php");
     exit();
 }
 
-// --- WORKFLOW GUARD 2: EMPTY CART CHECK ---
-// If the cart is empty, redirect them to the products page.
-if (empty($_SESSION['cart'])) {
-    header("Location: products.php");
-    exit();
-}
-
-// --- DATA FETCHING (Same logic as cart.php) ---
-$cart_items = $_SESSION['cart'];
+// --- HYBRID DATA FETCHING (Corrected Logic) ---
+$cart_items = [];
 $products = [];
 $grand_total = 0.00;
 
-$product_ids = array_keys($cart_items);
-$placeholders = implode(',', array_fill(0, count($product_ids), '?'));
-$sql = "SELECT product_id, product_name, price FROM products WHERE product_id IN ($placeholders)";
-$stmt = $conn->prepare($sql);
-if ($stmt) {
-    $types = str_repeat('i', count($product_ids));
-    $stmt->bind_param($types, ...$product_ids);
+if (isset($_SESSION['user_id'])) {
+    // USER IS LOGGED IN: Fetch cart from the database.
+    $user_id = $_SESSION['user_id'];
+    $sql = "SELECT p.product_id, p.product_name, p.price, c.quantity
+            FROM cart c
+            JOIN products p ON c.product_id = p.product_id
+            WHERE c.user_id = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("i", $user_id);
     $stmt->execute();
     $result = $stmt->get_result();
     while ($row = $result->fetch_assoc()) {
         $products[$row['product_id']] = $row;
+        $cart_items[$row['product_id']] = $row['quantity'];
     }
     $stmt->close();
+} else {
+    // This block is for guest checkout in the future, but the authentication guard
+    // currently prevents guests from reaching this page. This logic is here for completeness.
+    $session_cart = isset($_SESSION['cart']) ? $_SESSION['cart'] : [];
+    if (!empty($session_cart)) {
+        // (Logic to fetch guest cart details would go here if we allowed guest checkout)
+        $cart_items = $session_cart;
+    }
+}
+
+// --- WORKFLOW GUARD 2: EMPTY CART CHECK (Corrected Logic) ---
+if (empty($cart_items)) {
+    // Redirect if the resolved cart (from DB or session) is empty.
+    header("Location: products.php");
+    exit();
 }
 ?>
 
 <!-- =============================================== -->
 <!--           START: CHECKOUT CONTENT               -->
+<!-- The HTML part of this file does not need to change. -->
 <!-- =============================================== -->
 
 <h2 class="text-center mb-4">Checkout</h2>
 
 <div class="row g-5">
-
-    <!-- Left Column: Shipping Details Form -->
     <div class="col-md-7">
         <div class="card">
             <div class="card-body">
                 <h4 class="card-title mb-4">Shipping Information</h4>
-                <!-- This form will eventually post to our payment handler -->
-                <form action="payment_handler.php" method="POST">
+                <!-- The form's ID is added to be targeted by the payment button -->
+                <form id="checkoutForm" action="payment_handler.php" method="POST">
                     <div class="mb-3">
                         <label for="shipping_address" class="form-label">Full Shipping Address</label>
                         <textarea class="form-control" id="shipping_address" name="shipping_address" rows="4" required placeholder="Enter your street, city, state, and pin code..."></textarea>
                     </div>
-
-                    <!-- We will add the payment button inside this form later -->
-
                 </form>
             </div>
         </div>
     </div>
-
-    <!-- Right Column: Order Summary -->
     <div class="col-md-5">
         <div class="card">
             <div class="card-body">
@@ -92,8 +96,8 @@ if ($stmt) {
             </div>
         </div>
         <div class="d-grid mt-4">
-            <!-- This button will be part of the form above in the final version -->
-            <button type="submit" class="btn btn-primary btn-lg" form="shippingForm">Proceed to Payment</button>
+            <!-- This button is now linked to the form via the 'form' attribute -->
+            <button type="submit" class="btn btn-primary btn-lg" form="checkoutForm">Proceed to Payment</button>
         </div>
     </div>
 </div>
