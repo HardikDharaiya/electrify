@@ -1,8 +1,5 @@
 <?php
-// register.php - User registration form (Cleaned)
-
-// The session_start() call has been removed from this file.
-// Our header.php now handles starting the session for all pages.
+// register.php - Using the new Declarative Validation System
 
 require_once 'includes/header.php';
 ?>
@@ -15,8 +12,6 @@ require_once 'includes/header.php';
     <div class="col-md-8 col-lg-6">
 
         <?php
-        // --- DISPLAY FEEDBACK MESSAGES ---
-        // This code will still work perfectly because header.php has already started the session.
         if (isset($_SESSION['error_message'])) {
             echo '<div class="alert alert-danger" role="alert">' . $_SESSION['error_message'] . '</div>';
             unset($_SESSION['error_message']);
@@ -26,33 +21,39 @@ require_once 'includes/header.php';
         <div class="card shadow-sm">
             <div class="card-body p-4">
                 <h2 class="text-center mb-4">Create an Account</h2>
-                
+
+                <!-- MODIFICATION: Removed old validation attributes, added data-attributes -->
                 <form id="registrationForm" action="handle_register.php" method="POST" novalidate>
-                    
+
                     <div class="row">
                         <div class="col-md-6 mb-3">
                             <label for="first_name" class="form-label">First Name</label>
-                            <input type="text" class="form-control" id="first_name" name="first_name" required>
+                            <input type="text" class="form-control" id="first_name" name="first_name" data-validation="required alpha">
+                            <div class="invalid-feedback"></div>
                         </div>
                         <div class="col-md-6 mb-3">
                             <label for="last_name" class="form-label">Last Name</label>
-                            <input type="text" class="form-control" id="last_name" name="last_name" required>
+                            <input type="text" class="form-control" id="last_name" name="last_name" data-validation="required alpha">
+                            <div class="invalid-feedback"></div>
                         </div>
                     </div>
 
                     <div class="mb-3">
                         <label for="email" class="form-label">Email Address</label>
-                        <input type="email" class="form-control" id="email" name="email" required>
+                        <input type="email" class="form-control" id="email" name="email" data-validation="required email">
+                        <div class="invalid-feedback"></div>
                     </div>
 
                     <div class="mb-3">
                         <label for="password" class="form-label">Password</label>
-                        <input type="password" class="form-control" id="password" name="password" required minlength="8">
+                        <input type="password" class="form-control" id="password" name="password" data-validation="required min" data-min="8">
+                        <div class="invalid-feedback"></div>
                     </div>
 
                     <div class="mb-4">
                         <label for="confirm_password" class="form-label">Confirm Password</label>
-                        <input type="password" class="form-control" id="confirm_password" name="confirm_password" required minlength="8" equalTo="#password">
+                        <input type="password" class="form-control" id="confirm_password" name="confirm_password" data-validation="required confirmPassword" data-password-id="password">
+                        <div class="invalid-feedback"></div>
                     </div>
 
                     <div class="d-grid">
